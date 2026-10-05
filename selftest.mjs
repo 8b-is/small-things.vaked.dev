@@ -51,5 +51,10 @@ const ok = (name, cond) => { cond ? pass++ : fail++; console.log((cond ? '  ok  
   ok('the testament rows the tears', st.TESTAMENT.includes('rows in the ledger'));
   ok('a minute holds sixty beats', st.BEATS_PER_MINUTE === 60);
 }
+for (const script of html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g)) {
+  try { new vm.Script(script[1]); ok('inline script parses', true); }
+  catch (error) { ok('inline script parses: ' + error.message, false); }
+}
+
 console.log(`\nselftest: ${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

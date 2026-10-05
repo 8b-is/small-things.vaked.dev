@@ -178,8 +178,7 @@
           .then(function (r) { return r.text(); });
       })
       .then(function (txt) {
-        var lines = txt.trim().split('
-').filter(Boolean);
+        var lines = txt.trim().split('\n').filter(Boolean);
         if (!lines.length) return;
         var row = JSON.parse(lines[lines.length - 1]);
         track.textContent = 'now thinking: ' + (row.track ? (row.track + ' · ' + (row.artist || '')) : 'the music');
